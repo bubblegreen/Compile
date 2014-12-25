@@ -51,7 +51,7 @@ void parse_T()
 {
   parse_F();
   char c = str[i];
-  while (c=='*'){
+  while (c=='*' || c=='/'){
     i++;
     parse_F();
     c = str[i];
@@ -63,11 +63,14 @@ void parse_E()
 {
   parse_T();
   char c = str[i];
-  while (c=='+'){
+  while (c=='+' || c=='-'){
     i++;
     parse_T();
     c = str[i];
   }
+  if (c==')'){
+      return;
+  }    
   if (c=='\0')
     return;
   error ("\'+\' or '\\0\'", c);
